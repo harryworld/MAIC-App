@@ -20,7 +20,7 @@ struct AddTaskListScreen: View {
                 .textFieldStyle(.roundedBorder)
                 .padding([.leading, .trailing], 44)
 
-            ColorPickerView(selectedColor: $color)
+            // TODO: Color Picker
         }
         .onAppear(perform: {
             if let taskList {

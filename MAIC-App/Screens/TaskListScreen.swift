@@ -111,28 +111,7 @@ struct TaskListsScreen: View {
 
     var body: some View {
         List {
-            VStack {
-                HStack {
-                    TaskStatsView(icon: "calendar", title: "Today", count: todaysTasks.count)
-                        .onTapGesture {
-                            TaskStatsType = .today
-                        }
-                    TaskStatsView(icon: "calendar.circle.fill", title: "Scheduled ", count: scheduledTasks.count)
-                        .onTapGesture {
-                            TaskStatsType = .scheduled
-                        }
-                }
-                HStack {
-                    TaskStatsView(icon: "tray.circle.fill", title: "All", count: inCompleteTasks.count)
-                        .onTapGesture {
-                            TaskStatsType = .all
-                        }
-                    TaskStatsView(icon: "checkmark.circle.fill", title: "Completed", count: completedTasks.count)
-                        .onTapGesture {
-                            TaskStatsType = .completed
-                        }
-                }
-            }
+            // TODO: Stats View
 
             ForEach(taskLists) { list in
                 NavigationLink(value: list) {
@@ -146,7 +125,7 @@ struct TaskListsScreen: View {
                         }
                 }
             }
-            .onDelete(perform: deleteList)
+            // TODO: Delete list
 
             Button(action: {
                 actionSheet = .newList
@@ -158,22 +137,14 @@ struct TaskListsScreen: View {
             .listRowSeparator(.hidden)
 
         }
-        .searchable(text: $search)
-        .overlay(alignment: .center, content: {
-            if !search.isEmpty {
-                TaskListView(tasks: searchResults)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(colorScheme == .dark ? .black: .white)
-            }
-        })
+        // TODO: Search
         .navigationTitle("My Lists")
         .navigationDestination(item: $selectedList, destination: { taskList in
-            TaskListDetailScreen(taskList: taskList)
+            // TODO: Navigation to List Detail
         })
         .navigationDestination(item: $TaskStatsType, destination: { taskStatsType in
             NavigationStack {
-               TaskListView(tasks: tasks(for: taskStatsType))
-                    .navigationTitle(taskStatsType.title)
+               // TODO: Navigation to Stats
             }
         })
 
@@ -182,11 +153,11 @@ struct TaskListsScreen: View {
             switch actionSheet {
                 case .newList:
                     NavigationStack {
-                        AddTaskListScreen()
+                        // TODO: Add Task List
                     }
                 case .editList(let taskList):
                     NavigationStack {
-                        AddTaskListScreen(taskList: taskList)
+                        // TODO: Edit Task List
                     }
             }
         }
